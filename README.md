@@ -3,4 +3,5 @@ Simple Node.js website crawler that users either the ?SHOWXML or the sitemap.xml
 
 ## To Do
 * Allow user to enter in site url instead of having to adding it through the server.js file.
-* Rework to just use express.js? 
+* Redesign the UI
+* Rework to just use express.js?
