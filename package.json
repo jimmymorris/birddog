@@ -9,10 +9,11 @@
   "author": "Jimmy Morris",
   "license": "ISC",
   "dependencies": {
-    "express": "*",
-    "socket.io": "*",
     "cheerio": "^0.22.0",
     "crawler": "^1.1.2",
-    "request": "^2.83.0"
+    "express": "*",
+    "minimist": "^1.2.0",
+    "request": "^2.83.0",
+    "socket.io": "*"
   }
 }
