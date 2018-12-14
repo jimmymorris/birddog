@@ -4,111 +4,40 @@
     <meta charset="utf-8">
     <title>Birddog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+    <link href="https://unpkg.com/nes.css@0.0.2/css/nes.min.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
   </head>
   <body>
-    <br />
-    <div class="container">
-      <div class="form-inline">
-        <input id="url" title="url" type="text" placeholder="Please enter a URL" class="form-control col-sm-8" />&nbsp;
-        <button type="button" id="start" class="btn btn-primary">Start</button>
-      </div>
-    </div>
-    <br />
-    <div class="container">
-        <ul id="messaging" class="list-group"></ul>
-        <div id="counter-status" class="d-none alert alert-dark" role="alert"></div>
+    <div class="background"></div>
+    <div id="wrapper">
+
+        <h1>Birddog</h1>
+
+        <!-- Form -->
+        <section class="container">
+            <form id="url-form" class="form-inline">
+                <input id="url" title="url" type="text" placeholder="Please enter a URL" class="input" />&nbsp;
+                <button type="submit" class="btn is-primary">Start!</button>
+            </form>
+        </section>
+
+        <!-- Results -->
+        <section class="results">
+            <h2 class="title">Results</h2>
+            <ul id="messaging" class="list-group"></ul>
+            <div class="messages">
+                <div class="message -left">
+                    <img src="https://media.giphy.com/media/Ft6CnjFo1oVxe/giphy.gif" alt="">
+                    <div class="balloon from-left">
+                        <div id="counter-status" class="d-none alert alert-dark" role="alert"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </div>
 
     <script src="/socket.io/socket.io.js"></script>
-    <script>
-      let start = document.querySelector("#start");
-      let url = document.querySelector('#url');
-      let $messaging = document.querySelector('#messaging');
-      let $counterStatus = document.querySelector('#counter-status');
-
-      start.addEventListener('click', function() {
-        if (url.value.length === 0 || url.value.indexOf('http') === -1) {
-          console.log('clear out the messages');
-          $messaging.innerHTML = '';
-          $counterStatus.innerHTML = '';
-
-          let html = document.createElement('li');
-          html.classList.add('list-group-item','list-group-item-danger');
-          html.innerHTML = "Url must be valid";
-          $messaging.appendChild(html);
-          return;
-        }
-
-        let socket = io.connect();
-
-        socket.on('getUrl', () => {
-          socket.emit ('getUrlSuccess', url.value);
-        });
-
-        socket.on('new scent', (response) => {
-          let html = document.createElement('li');
-          html.classList.add('list-group-item');
-          html.innerHTML = response.msg;
-          $messaging.appendChild(html);
-        });
-
-        socket.on('whine', (response) => {
-          let html = document.createElement('li');
-          html.classList.add('list-group-item','list-group-item-warning');
-          html.innerHTML = response.msg;
-          $messaging.appendChild(html);
-        });
-
-        socket.on('heel', () => {
-          console.log('clear out the messages');
-          $messaging.innerHTML = '';
-          $counterStatus.innerHTML = '';
-        });
-
-        socket.on('yelp', (response)=>{
-          let html = document.createElement('li');
-          html.classList.add('list-group-item', 'list-group-item-primary');
-          html.innerHTML = response.msg;
-          $messaging.appendChild(html);
-        });
-
-        socket.on('start flush', () => {
-          // $counterStatus.classList.remove('d-hide');
-          $counterStatus.className = $counterStatus.className.replace(/\bd-none\b/g, "");
-        });
-
-        socket.on('flush', (response) => {
-          // console.log(response.msg);
-          $counterStatus.innerHTML = response.msg;
-        });
-
-        socket.on('bad dog', (response) => {
-          let html = document.createElement('li');
-          html.classList.add('list-group-item', 'list-group-item-danger');
-          html.innerHTML = response.msg;
-          $messaging.appendChild(html);
-        });
-
-        // socket.on('bark', (response) => {
-        //     let html = document.createElement('li');
-        //     html.classList.add('list-group-item', 'list-group-item-success');
-        //     html.innerHTML = response.msg;
-        //     $messaging.appendChild(html);
-        // });
-
-        socket.on('laydown', (response) => {
-          let html = document.createElement('li');
-          html.classList.add('list-group-item', 'list-group-item-success');
-          html.innerHTML = response.msg;
-          $messaging.appendChild(html);
-          // $counterStatus.classList.add('d-none')
-          let classes = $counterStatus.className.split(' ');
-          if (!classes.includes('d-none')) {
-              $counterStatus.className += ' ' + 'd-none';
-          }
-        });
-      })
-    </script>
+    <script src="app.js"></script>
   </body>
 </html>

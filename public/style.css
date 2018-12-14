@@ -1,0 +1,33 @@
+/* General */
+#wrapper {
+    max-width: 60vw;
+    margin: 3rem auto;
+}
+.container.is-warning { color: #f7d51d; }
+.container.is-error { color: #e76e55; }
+.container.is-success { color: #92cc41; }
+.container { margin-bottom: 1rem; }
+
+/* Intro */
+.form-inline { display: flex; }
+.form-inline input { flex: 1 1 auto; }
+
+/* Results */
+.results { margin-top: 2rem; }
+.results, .messages { opacity: 0;  transition: opacity 0.3s; }
+.start .results, .done .results { opacity: 1; }
+.container.results { padding-bottom: 6px; }
+.list-group {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Duck Hunt Dog */
+.searching .messages { opacity: 1; }
+.message {
+    display: flex;
+    align-items: flex-start;
+}
+.message img { vertical-align: bottom; }
+.balloon { flex: 1 1 auto; }
