@@ -16,6 +16,8 @@ server.listen(process.env.PORT || 3000);
 
 console.log('Server running...');
 
+app.use(express.static('public'))
+
 app.get('/', (req, res) =>{
   res.sendFile(`${__dirname}/index.html`);
 });
@@ -34,7 +36,7 @@ io.on('connection', function (socket) {
     pageQueue = [];
     io.to(`${socket.id}`).emit('heel');
     io.to(`${socket.id}`).emit('new scent', {
-      msg: `Getting sitemap... <a href="${sitemap}" target="_blank">${sitemap}</a>`
+      msg: `Getting sitemap...<br><a href="${sitemap}" target="_blank">${sitemap}</a>`
     });
 
     request(sitemap, function (error, response, html) {
